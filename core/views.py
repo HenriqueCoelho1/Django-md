@@ -13,10 +13,7 @@ def contact(request):
 
     if str(request.method) == "POST":
         if form.is_valid():
-            name = form.cleaned_data["name"]
-            email = form.cleaned_data["email"]
-            subject = form.cleaned_data["subject"]
-            message = form.cleaned_data["message"]
+            form.send_mail()
 
             messages.success(request, "Email was send with success")
             form = ContactForm()
