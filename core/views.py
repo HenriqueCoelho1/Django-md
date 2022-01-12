@@ -2,10 +2,12 @@ from django.shortcuts import render
 from django.contrib import messages
 
 from .forms import ContactForm, ProductModelForm
+from .models import Product
 
 
 def index(request):
-    return render(request, "index.html")
+    context = {"products": Product.objects.all()}
+    return render(request, "index.html", context)
 
 
 def contact(request):
@@ -28,11 +30,7 @@ def product(request):
     if str(request.method) == "POST":
         form = ProductModelForm(request.POST, request.FILES)
         if form.is_valid():
-            prod = form.save(commit=False)
-            print(f"Name: {prod.name}")
-            print(f"Price: {prod.price}")
-            print(f"Stock: {prod.stock}")
-            print(f"Image: {prod.image}")
+            form.save()
 
             messages.success(request, "Product Save with Success")
             form = ProductModelForm()

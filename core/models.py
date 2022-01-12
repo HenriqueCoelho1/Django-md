@@ -20,7 +20,7 @@ class Product(Base):
     price = models.DecimalField("Price", max_digits=8, decimal_places=2)
     stock = models.IntegerField("Stock")
     image = StdImageField(
-        "Image", upload_to="products", variations={"thumb": (124, 124)}
+        "Image", upload_to="products_media", variations={"thumb": (124, 124)}
     )
     slug = models.SlugField("Slug", max_length=100, blank=True, editable=False)
 
